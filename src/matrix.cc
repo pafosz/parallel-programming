@@ -25,19 +25,10 @@ template <typename T>
 M::Matrix<T>& M::Matrix<T>::operator+=(const M::Matrix<T> &rhs);
 
 template <typename T>
-M::Matrix<T> operator+(M::Matrix<T> lhs, const M::Matrix<T> &rhs);
-
-template <typename T>
 M::Matrix<T>& M::Matrix<T>::operator-=(const Matrix<T> &rhs);
 
 template <typename T>
-M::Matrix<T> operator-(M::Matrix<T> lhs, const M::Matrix<T> &rhs);
-
-template <typename T>
 M::Matrix<T>& M::Matrix<T>::operator*=(Matrix<T> rhs);
-
-template <typename T>
-M::Matrix<T> operator*(M::Matrix<T> lhs, const M::Matrix<T> &rhs);
 
 template <typename T>
 void M::Matrix<T>::print() const;

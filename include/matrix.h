@@ -21,20 +21,11 @@ namespace M
 		const T& operator()(size_t row, size_t column) const;
 		T& operator()(size_t row, size_t column);
 
-		Matrix<T>& operator+=(const Matrix<T>& rhs);
+		Matrix<T>& operator+=(const Matrix<T>& rhs);	
 
-		template<typename U>
-		friend Matrix<U> operator+(Matrix<U> lhs, const Matrix<U>& rhs);
-
-		Matrix<T>& operator-=(const Matrix<T>& rhs);
+		Matrix<T>& operator-=(const Matrix<T>& rhs);		
 		
-		template<typename U>
-		friend Matrix<U>& operator-(Matrix<U> lhs, const Matrix<U>& rhs);
-		
-		Matrix<T>& operator*=(Matrix<T> rhs);
-
-		template<typename U>
-		friend Matrix<U>& operator*(Matrix<U> lhs, const Matrix<U>& rhs);
+		Matrix<T>& operator*=(Matrix<T> rhs);		
 		
 		void print() const;
 
@@ -63,11 +54,11 @@ M::Matrix<T>::Matrix(std::initializer_list<std::initializer_list<T>> list) :
 				static_cast<size_t>(list.size() ? list.begin()->size() : 0)}
 {
 	std::for_each(list.begin(), list.end(),
-				  [this, i{0}](auto &row) mutable
-				  {
-					  std::copy(row.begin(), row.end(), _data.begin() + i++ * _rows);
-				  }
-				);
+			[this, i{0}](auto &row) mutable
+			{
+				std::copy(row.begin(), row.end(), _data.begin() + i++ * _cols);
+			}
+		);
 }
 
 template <typename T>
@@ -83,18 +74,21 @@ size_t M::Matrix<T>::get_cols() const noexcept
 }
 
 template <typename T>
-const T& M::Matrix<T>::operator()(size_t row, size_t column) const{
+const T& M::Matrix<T>::operator()(size_t row, size_t column) const
+{
 	return _data[row * _cols + column];
 }
 
 template <typename T>
-T& M::Matrix<T>::operator()(size_t row, size_t column){
+T& M::Matrix<T>::operator()(size_t row, size_t column)
+{
 	return _data[row * _cols + column];
 }
 
 template<typename T>
-M::Matrix<T>& M::Matrix<T>::operator+=(const Matrix<T>& rhs){
-	if(this->_cols != rhs._cols && this->_rows != rhs._rows){
+M::Matrix<T>& M::Matrix<T>::operator+=(const Matrix<T>& rhs) 
+{
+	if(this->_cols != rhs._cols || this->_rows != rhs._rows){
 		throw std::invalid_argument{"Failed to sum matrices"};
 	}
 	std::transform(_data.begin(), _data.end(),
@@ -106,14 +100,16 @@ M::Matrix<T>& M::Matrix<T>::operator+=(const Matrix<T>& rhs){
 }
 
 template<typename T>
-M::Matrix<T> operator+(M::Matrix<T> lhs, const M::Matrix<T>& rhs) {
+M::Matrix<T> operator+(M::Matrix<T> lhs, const M::Matrix<T>& rhs) 
+{
     lhs += rhs;
     return lhs;
-}
+}	
 
 template<typename T>
-M::Matrix<T>& M::Matrix<T>::operator-=(const Matrix<T>& rhs){
-	if(_rows != rhs._rows && _cols != rhs._cols){
+M::Matrix<T>& M::Matrix<T>::operator-=(const Matrix<T>& rhs)
+{
+	if(_rows != rhs._rows || _cols != rhs._cols){
 		throw std::invalid_argument{"Failed to subtruct matrices"};
 	}
 	std::transform(_data.begin(), _data.end(),
@@ -125,17 +121,19 @@ M::Matrix<T>& M::Matrix<T>::operator-=(const Matrix<T>& rhs){
 }
 
 template<typename T>
-M::Matrix<T>& operator-(M::Matrix<T> lhs, const M::Matrix<T>& rhs){
-	lhs -= rhs;
-	return lhs;
+M::Matrix<T> operator-(M::Matrix<T> lhs, const M::Matrix<T>& rhs) 
+{ 
+    lhs -= rhs;  
+    return lhs;
 }
 
 template<typename T>
-M::Matrix<T>& M::Matrix<T>::operator*=(Matrix<T> rhs){
+M::Matrix<T>& M::Matrix<T>::operator*=(Matrix<T> rhs)
+{
 	if(_cols != rhs._rows){
 		throw std::invalid_argument{"Failed to multyply matrices"};
 	}
-	Matrix<T> result(_cols, rhs._rows);
+	Matrix<T> result(_rows, rhs._cols);
 	for(size_t i = 0; i < _cols; ++i)
 	{
 		for(size_t j = 0; j < rhs._rows; ++j)
@@ -150,17 +148,18 @@ M::Matrix<T>& M::Matrix<T>::operator*=(Matrix<T> rhs){
 	}
 	*this = result;
 	return *this;
-
 }
 
 template<typename T>
-M::Matrix<T>& operator*(M::Matrix<T> lhs, const M::Matrix<T>& rhs){
+M::Matrix<T> operator*(M::Matrix<T> lhs, const M::Matrix<T>& rhs)
+{
 	lhs *= rhs;
 	return lhs;
 }
 
 template<typename T>
-void M::Matrix<T>::print() const {
+void M::Matrix<T>::print() const 
+{
 	for(size_t i = 0; i < _rows; i++){
 		for(size_t j = 0; j < _cols; j++){
 			std::cout << (*this)(i, j) << "\t";
