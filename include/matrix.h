@@ -1,9 +1,11 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
-#include <algorithm> 
+#include <algorithm>
+#include <iostream>
 #include <vector>
 #include <functional>
+#include <stdexcept>
 
 namespace M
 {
