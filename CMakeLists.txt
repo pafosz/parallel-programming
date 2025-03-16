@@ -8,10 +8,12 @@ include_directories(include)
 
 # Создаем исполняемый файл, добавляя новый файл stats.cc
 add_executable(my_project main.cc 
+src/file_manager.cc
 src/matrix.cc 
-src/stat.cc
 src/random_generator.cc
+src/stat.cc
+include/file_manager.h
 include/matrix.h 
-include/stat.h
 include/random_generator.h
+include/stat.h
 )

@@ -31,7 +31,13 @@ template <typename T>
 M::Matrix<T>& M::Matrix<T>::operator*=(Matrix<T> rhs);
 
 template<typename T>
+void M::Matrix<T>::clear();
+
+template<typename T>
 void M::Matrix<T>::fill_random(const T& min_val, const T& max_val);
+
+template<typename T>
+void M::Matrix<T>::write_to_file(const std::string& filename) const;
 
 template <typename T>
 void M::Matrix<T>::print() const;

@@ -6,6 +6,7 @@
 #include <vector>
 #include <functional>
 #include <stdexcept>
+#include <fstream>
 
 #include "random_generator.h"
 
@@ -29,10 +30,14 @@ namespace M
 
 		Matrix<T>& operator-=(const Matrix<T>& rhs);		
 		
-		Matrix<T>& operator*=(Matrix<T> rhs);	
+		Matrix<T>& operator*=(Matrix<T> rhs);
+
+		void clear();
 
 		void fill_random(const T& min_val, const T& max_val);
-		
+
+		void write_to_file(const std::string& filename) const;
+
 		void print() const;
 
 	private:
@@ -164,8 +169,31 @@ M::Matrix<T> operator*(M::Matrix<T> lhs, const M::Matrix<T>& rhs)
 }
 
 template<typename T>
+void M::Matrix<T>::clear() {
+	_data.clear();
+	_rows = 0;
+	_cols = 0;
+}
+
+template<typename T>
 void M::Matrix<T>::fill_random(const T& min_val, const T& max_val) {
 	_data = RandomGenerator::generate_matrix(_rows, _cols, min_val, max_val);
+}
+
+template<typename T>
+void M::Matrix<T>::write_to_file(const std::string& filename) const {
+	std::ofstream file(filename);
+	if (!file.is_open()) {
+		throw std::runtime_error("[Matrix::write_to_file]Couldn't open the file for writing.");
+	}
+
+	for (size_t i = 0; i < _rows; i++) {
+		for (size_t j = 0; j < _cols; j++) {
+			file << (*this)(i, j) << "\t";
+		}
+		file << "\n";
+	}
+	file.close();
 }
 
 template<typename T>
@@ -175,8 +203,9 @@ void M::Matrix<T>::print() const
 		for(size_t j = 0; j < _cols; j++){
 			std::cout << (*this)(i, j) << "\t";
 		}
-		std::cout << "\n";
+		std::cout << "\n";;
 	}
+	std::cout << "\n";
 }
 
 #endif // MATRIX_H
