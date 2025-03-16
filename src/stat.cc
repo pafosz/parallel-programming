@@ -1,14 +1,18 @@
 #include "../include/stat.h"
 
 ExecutionTimer::ExecutionTimer() :
-    end{},
-    duration{}
+    _end{},
+    _duration{}
 {
-    start = std::chrono::high_resolution_clock::now();
+    _start = std::chrono::high_resolution_clock::now();
 }
 
-double ExecutionTimer::stop() {
-    end = std::chrono::high_resolution_clock::now();
-    duration = end - start;
-    return duration.count();
+void ExecutionTimer::stop() {
+    _end = std::chrono::high_resolution_clock::now();
+    _duration = _end - _start;
+    std::cout << "Duration of the process: " << _duration.count() << std::endl;
+}
+
+double ExecutionTimer::get_duration() const {
+    return _duration.count();
 }

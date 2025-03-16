@@ -7,6 +7,8 @@
 #include <functional>
 #include <stdexcept>
 
+#include "random_generator.h"
+
 namespace M
 {
 	template <typename T = float>
@@ -27,7 +29,9 @@ namespace M
 
 		Matrix<T>& operator-=(const Matrix<T>& rhs);		
 		
-		Matrix<T>& operator*=(Matrix<T> rhs);		
+		Matrix<T>& operator*=(Matrix<T> rhs);	
+
+		void fill_random(const T& min_val, const T& max_val);
 		
 		void print() const;
 
@@ -133,7 +137,7 @@ template<typename T>
 M::Matrix<T>& M::Matrix<T>::operator*=(Matrix<T> rhs)
 {
 	if(_cols != rhs._rows){
-		throw std::invalid_argument{"Failed to multyply matrices"};
+		throw std::invalid_argument{"Failed to multiply matrices"};
 	}
 	Matrix<T> result(_rows, rhs._cols);
 	for(size_t i = 0; i < _cols; ++i)
@@ -157,6 +161,11 @@ M::Matrix<T> operator*(M::Matrix<T> lhs, const M::Matrix<T>& rhs)
 {
 	lhs *= rhs;
 	return lhs;
+}
+
+template<typename T>
+void M::Matrix<T>::fill_random(const T& min_val, const T& max_val) {
+	_data = RandomGenerator::generate_matrix(_rows, _cols, min_val, max_val);
 }
 
 template<typename T>

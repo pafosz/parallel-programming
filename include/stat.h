@@ -7,11 +7,12 @@
 
 class ExecutionTimer {
 private:
-    std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
-    std::chrono::duration<double> duration;
+    std::chrono::time_point<std::chrono::high_resolution_clock> _start, _end;
+    std::chrono::duration<double> _duration;
 public:
     ExecutionTimer();
-    double stop();
+    void stop();
+    double get_duration() const;
 };
 
 #endif //STAT_H

@@ -2,25 +2,20 @@
 
 #include "include/matrix.h"
 #include "include/stat.h"
+#include "include/random_generator.h"
 
 int main(){
-    int data[] = { 1, 2, 3, 4 };
-    M::Matrix<int> A = { 
-        {1, 2, 3},
-        {5, 6, 4},
-        {6, 7, 7}  
-    };
-    
-    M::Matrix<int> B = {
-        {1, 2, 1},
-        {3, 6, 5},
-        {6, 7, 7}       
-    };
-    
+    M::Matrix<int> A(1000, 1000);
+    A.fill_random(0, 1000);
+    M::Matrix<int> B(1000, 1000);
+    B.fill_random(0, 1000);
+
     ExecutionTimer timer;
-    M::Matrix<int> C = A * B;
-    double time = timer.stop();
-    printf("%f", time);
+    A *= B;
+    timer.stop();
+    double time = timer.get_duration();
+    std::cout << time;
+    
 
     return 0;
 }
