@@ -43,8 +43,9 @@ def plot_results(csv_path):
     plt.title('Matrix Multiplication Performance')
     plt.grid(True)
     plt.legend()
-    plt.show()
     plt.savefig('stat2.png', dpi=300, bbox_inches='tight')
+    plt.show()
+
 
 
 def main():
