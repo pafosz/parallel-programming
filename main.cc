@@ -45,14 +45,14 @@ static void write_matrix(const std::string& filename, M::Matrix<int> matrix) {
 
 int main() {
 	
-	std::vector<int> SIZES = { 100, 200, 300, 400, 500, 1000, 2000 }; 
+	std::vector<int> SIZES = { 100, 200, 300, 400, 500, 1000, 2000 };
 	std::vector<double> TIMES(SIZES.size());
 	chdir("C:\\Users\\user\\Desktop\\ALL\\University\\3 cours\\6 semester\\PP\\Labs");
-	
+
 	std::string dir_result = "result";
 	create_directory(dir_result);
 	chdir(dir_result);
-	
+
 
 	for (size_t i = 0; i < SIZES.size(); i++) {
 		M::Matrix<int> A(SIZES[i], SIZES[i]);
