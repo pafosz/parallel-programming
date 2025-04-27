@@ -22,6 +22,8 @@ namespace M
 
 		size_t get_rows() const noexcept;
 		size_t get_cols() const noexcept;
+		T* get_data() noexcept;
+		const T* get_data() const noexcept;
 
 		const T& operator()(size_t row, size_t column) const;
 		T& operator()(size_t row, size_t column);
@@ -83,6 +85,18 @@ size_t M::Matrix<T>::get_cols() const noexcept
 {
 	return _cols;
 }
+
+template<typename T>
+T* M::Matrix<T>::get_data() noexcept
+{
+	return _data.data();
+}
+
+template<typename T>
+const T* M::Matrix<T>::get_data() const noexcept {
+	return _data.data();
+}
+
 
 template <typename T>
 const T& M::Matrix<T>::operator()(size_t row, size_t column) const

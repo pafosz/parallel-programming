@@ -1,0 +1,7 @@
+Matrix 100x100 multiplication: correct
+Matrix 200x200 multiplication: correct
+Matrix 300x300 multiplication: correct
+Matrix 400x400 multiplication: correct
+Matrix 500x500 multiplication: correct
+Matrix 1000x1000 multiplication: correct
+Matrix 2000x2000 multiplication: correct

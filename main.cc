@@ -21,7 +21,7 @@ static void create_directory(const std::string& dir_name) {
 	}
 }
 
-static void chdir(std::string dir_name) {
+static void chdir(const std::string& dir_name) {
 	try {
 		std::filesystem::current_path(dir_name);
 		std::cout << "The current directory has been changed to: " << std::filesystem::current_path() << std::endl;
