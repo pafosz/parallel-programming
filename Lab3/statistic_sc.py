@@ -78,14 +78,14 @@ def plot_data(data: Dict[int, List[Tuple[int, float]]]) -> None:
         plt.plot(sizes, times, 'o-', label=f"{proc_count} процессов")
 
     plt.xlabel('Размер матрицы (NxN)')
-    plt.ylabel('Время выполнения (мс)')
+    plt.ylabel('Время выполнения (с)')
     plt.title('Производительность умножения матриц')
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
 
     # Сохраняем график
-    plot_path = os.path.join(folder, "matrix_performance.png")
+    plot_path = os.path.join(folder, "stat_sc.png")
     plt.savefig(plot_path)
     print(f"График сохранён в {plot_path}")
     plt.show()

@@ -108,9 +108,9 @@ int main(int argc, char** argv) {
         double end_time = MPI_Wtime();
 
         if (rank == 0) {
-            double time_ms = (end_time - start_time) * 1000;
+            double time_ms = (end_time - start_time);
             std::cout << "Size " << size << "x" << size
-                      << " Time: " << time_ms << " ms" << std::endl;
+                      << " Time: " << time_ms << "s" << std::endl;
 
             if (size <= 5) {
                 std::cout << "Matrix A (first 5x5):" << std::endl;
