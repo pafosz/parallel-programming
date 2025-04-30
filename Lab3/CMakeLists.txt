@@ -7,7 +7,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(MPI REQUIRED)
 
-add_executable(${PROJECT_NAME} mpi.cc)
+add_executable(${PROJECT_NAME} mpi_super.cc)
+
 
 target_link_libraries(${PROJECT_NAME} PRIVATE MPI::MPI_CXX)
 
